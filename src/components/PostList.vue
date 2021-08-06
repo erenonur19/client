@@ -17,10 +17,10 @@
       <strong>Author: {{post.userName}}</strong>
     </div>
     
-    <button @click="editPost(post._id)" class="button is-success">Edit</button>
+    <button @click="editPost(post._id)" class="button is-black">Edit</button>
   
     <button @click="removePost(post._id)" class="button is-danger ">Delete</button>
-                          
+                     
     
      
     
@@ -29,7 +29,9 @@
 
     
   </div>
+  
 </div>  
+
 
   </div>
   

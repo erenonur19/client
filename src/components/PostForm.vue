@@ -29,11 +29,11 @@
 
 <div class="field is-grouped">
   <div class="control">
-    <button type="submit" class="button is-success">Submit</button>
+    <button type="submit" class="button is-black">Submit</button>
   </div>
- <!-- <div class="control">
+  <div class="control">
     <button class="button is-danger">Cancel</button>
-  </div> -->
+  </div> 
 </div></form>
 
 
