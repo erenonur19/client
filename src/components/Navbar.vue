@@ -19,8 +19,13 @@
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
     <strong class="navbar-item">FORUMAPI</strong>    
-  
-      <a class="navbar-item" href="http://localhost:8080/">
+
+
+    <a class="navbar-item" href="http://localhost:8080">
+        <strong>Homepage</strong>
+      </a>
+
+      <a class="navbar-item" href="http://localhost:8080/posts">
         <strong>Posts</strong>
       </a>
       <a class="navbar-item" href="http://localhost:8080/create">
@@ -36,10 +41,10 @@
         <div class="buttons">
           <a class="button is-white">
             
-            <strong>Sign up</strong>
+            <strong>Profile</strong>
           </a>
           <a class="button is-white">
-            <strong>Log In</strong>
+            <strong>Log Out</strong>
           </a>
         </div>
       </div>

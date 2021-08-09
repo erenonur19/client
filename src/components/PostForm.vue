@@ -1,7 +1,7 @@
 <template>
    <div class="container">
      <br>
-     <br>
+     
      
  
  <form @submit.prevent="createPost"><div class="field">
@@ -43,10 +43,13 @@
 <script>
 
 
+import {useRouter} from 'vue-router'
 
 export default {
-    props:['post','createPost']
-
+  props:['post','createPost'],
+  
+         
+  
 }
 </script>
 

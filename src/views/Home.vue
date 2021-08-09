@@ -1,14 +1,14 @@
 <template>
- <PostList />
+ <authentication />
 </template>
 
 <script>
+import Authentication from '../components/Authentication.vue'
 
-import PostList from '../components/PostList.vue'
+
 export default {
-    components:{
-        PostList,
-    },
+  components: { Authentication },
+   
 
 }
 </script>

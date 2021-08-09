@@ -30,13 +30,13 @@ export default {
             getPost()
         })
 
-        async function getPost(){
-            const{id}=route.params
-            const response=await fetch(`${API_URL}/${id}`)
-            const json=await response.json()
-            post.value=json
+        // async function getPost(){
+        //     const{id}=route.params
+        //     const response=await fetch(`${API_URL}/${id}`)
+        //     const json=await response.json()
+        //     post.value=json
 
-        }
+        // }
         async function updatePost(){
             const{id}=route.params
             const response=await fetch(`${API_URL}/${id}`,{

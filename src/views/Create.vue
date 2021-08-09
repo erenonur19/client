@@ -37,7 +37,7 @@ export default {
       })
       const result=await response.json()
       router.push({
-        name:'Home'
+        name:'Posts'
       })
 
     

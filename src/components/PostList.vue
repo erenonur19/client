@@ -6,7 +6,7 @@
       <div class="card-content">
     <div class="media">
       <div class="media-content">
-        <p class="title is-4">{{post.title}}</p> 
+        <p><a @click="getirPost(post._id)" class="title is-4">{{post.title}}</a> </p>
       </div>
     </div>
     
@@ -16,10 +16,12 @@
       <br>
       <strong>Author: {{post.userName}}</strong>
     </div>
+
     
-    <button @click="editPost(post._id)" class="button is-black">Edit</button>
+    <button @click="getirPost(post._id)" class="button is-black">Details</button>
   
     <button @click="removePost(post._id)" class="button is-danger ">Delete</button>
+     
                      
     
      
@@ -74,10 +76,20 @@ export default {
           })
           
         } 
+        async function getirPost(_id){
+          router.push({
+            name:'Post',
+            params:{
+              id:_id,
+            },
+          })
+          
+        } 
         return{
             posts,
             removePost,
             editPost,
+            getirPost
         }
     }
 }
