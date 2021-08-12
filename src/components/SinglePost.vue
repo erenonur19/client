@@ -70,10 +70,10 @@
     <input v-model="newMessage.userName" class="input" type="text" placeholder="Text input" required>
   </div>
   
-  <label class="label">Title</label>
+  <!-- <label class="label">Title</label>
   <div class="control">
     <input v-model="newMessage.title" class="input" type="text" placeholder="Text input">
-  </div>
+  </div> -->
   
   <label class="label">Message</label>
       <p class="control">
@@ -94,6 +94,7 @@
 
 <script>
 import {useRouter,useRoute} from 'vue-router'
+
 import {ref,reactive, onMounted } from 'vue'
 export default{
 setup(){
@@ -107,7 +108,6 @@ setup(){
     const messages=ref([])
     const newMessage=reactive({
       userName:'',
-      title:'',
       message:''
 
     })
@@ -134,21 +134,22 @@ async function getMessages(_id){
 
 }
 async function postMessage(){
-  
-     const response=await fetch(`${API_URL}/comments`,{
+     const {id}=route.params
+     const response=await fetch(`${API_URL}/${id}/comments`,{
        method:'POST',
        headers:{
          'content-type':'application/json'
        },
        body: JSON.stringify({
         userName:newMessage.userName,
-        title:newMessage.title,
-        message:newMessage.message
+        message:newMessage.message,
+        title:newMessage.title
 
        })
      })
       const res=await response.json();
-      getMessages()
+      location.reload();
+      
       
   
 

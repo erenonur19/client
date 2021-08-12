@@ -1,5 +1,7 @@
 <template>
+  
   <SinglePost />
+  
 </template>
 
 <script>
@@ -9,6 +11,7 @@ export default {
     components:{
         SinglePost,
     },
+    
 
 }
 
