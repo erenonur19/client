@@ -7,14 +7,14 @@
  <form @submit.prevent="createPost"><div class="field">
   <label class="label">Username</label>
   <div class="control">
-    <input v-model="post.userName" class="input" type="text" placeholder="Text input">
+    <input v-model="post.userName" class="input" type="text" placeholder="Text input" required>
   </div>
 </div>
 
 <div class="field">
   <label class="label">Title</label>
   <div class="control">
-    <input v-model="post.title" class="input" type="text" placeholder="Text input">
+    <input v-model="post.title" class="input" type="text" placeholder="Text input" required>
   </div>
 </div>
 
@@ -22,7 +22,7 @@
 <div class="field">
   <label class="label">Message</label>
   <div class="control">
-    <textarea v-model="post.message" class="textarea" placeholder="Textarea"></textarea>
+    <textarea v-model="post.message" class="textarea" placeholder="Textarea" required></textarea>
   </div>
 </div>
 

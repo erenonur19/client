@@ -21,8 +21,8 @@
     <strong class="navbar-item">FORUMAPI</strong>    
 
 
-    <a class="navbar-item" href="http://localhost:8080">
-        <strong>Homepage</strong>
+    <a class="navbar-item" href="http://localhost:8080/login">
+        <strong>Log In</strong>
       </a>
 
       <a class="navbar-item" href="http://localhost:8080/posts">

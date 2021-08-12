@@ -67,7 +67,7 @@
       <label class="label">Username</label>
       
   <div class="control">
-    <input v-model="newMessage.userName" class="input" type="text" placeholder="Text input">
+    <input v-model="newMessage.userName" class="input" type="text" placeholder="Text input" required>
   </div>
   
   <label class="label">Title</label>
@@ -77,7 +77,7 @@
   
   <label class="label">Message</label>
       <p class="control">
-        <textarea v-model="newMessage.message" class="textarea" placeholder="Add a comment..."></textarea>
+        <textarea v-model="newMessage.message" class="textarea" placeholder="Add a comment..." required></textarea>
       </p>
     </div>
     <div class="field">
@@ -177,7 +177,7 @@ return{
   .btnsb
    {
       position:relative;
-      left:1123px;
+      left:1100px;
 
    }
    .submitForm{

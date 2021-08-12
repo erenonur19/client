@@ -39,25 +39,18 @@
  <div class="field">
   <label class="label">Password</label>
   <div class="control">
-    <input class="input" type="password" placeholder="Text input">
+    <input class="input" type="password" placeholder="********">
   </div>
 </div>
-<div class="field">
-  <div class="control">
-    <label class="checkbox">
-      <input type="checkbox">
-      I agree to the <a href="#">terms and conditions</a>
-    </label>
-  </div>
-</div>
+<br>
 
 
 <div class="field is-grouped">
   <div class="control">
-    <button class="button is-link">Register</button>
+    <button class="button is-black">Register</button>
   </div>
   <div class="control">
-    <button class="button is-link is-light">Cancel</button>
+    <button class="button is-danger">Cancel</button>
   </div>
 </div>
 </div>
