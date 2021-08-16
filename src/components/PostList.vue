@@ -46,10 +46,20 @@ import { ref,onMounted } from 'vue'
 import {useRouter} from 'vue-router'
 export default {
     setup(){
+      function validation(){
+          if(localStorage.getItem('token')===null){
+            alert('You need to be logged in before you access the content..')
+          router.push({
+            name:'Login',
+          })}
+        
+        }
+        
         const router=useRouter()
         const posts=ref([])
         const API_URL='http://localhost:3000/posts'
         onMounted(()=>{
+            validation()
             getPosts()
         })
 
@@ -89,7 +99,8 @@ export default {
             posts,
             removePost,
             editPost,
-            getirPost
+            getirPost,
+            validation
         }
     }
 }

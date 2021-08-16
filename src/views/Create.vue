@@ -7,6 +7,7 @@
 import PostForm from '../components/PostForm.vue'
 import{reactive} from 'vue'
 import{useRouter} from 'vue-router'
+import {onMounted} from 'vue'
 
 export default {
   components:{
@@ -14,10 +15,21 @@ export default {
   },
 
   setup(){
+    onMounted(()=>{
+            validation()
+          
+        })
     const API_URL='http://localhost:3000/posts'
     const router=useRouter()
+    function validation(){
+          if(localStorage.getItem('token')===null){
+            alert('You need to be logged in before you access the content..')
+          router.push({
+            name:'Login',
+          })}
+        
+        }
     const post=reactive({
-      userName:'',
       title:'',
       message:''
 
@@ -47,6 +59,7 @@ export default {
   return{
     post,
     createPost,
+    validation,
     
   }
 }

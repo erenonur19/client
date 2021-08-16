@@ -33,17 +33,23 @@
   <div class="control">
     <button class="button is-black">Register</button>
   </div>
+  
   <div class="control">
-    <button class="button is-danger">Cancel</button>
+    <button @click="goLogin" class="button is-danger">Cancel</button>
   </div>
+  
 </div>
+<br>
+  <br>
+  <strong style="color:red;">{{error}}</strong>
 </form>
 </div>
 </template>
 
 <script>
-
+import Vue from 'vue';
 import axios from 'axios';
+import{useRouter} from 'vue-router'
 
 export default {
 
@@ -52,18 +58,38 @@ export default {
     name:'',
     userName:'',
     email:'',
-    password:'',
+    password:'', 
+    error:'',
   }
 },
+
 methods:{
-  createUser(){
+  goLogin(){
+  
+  this.$router.push({
+    name:'Login'
+  })
+  },
+  async createUser(){
     const newUser={
       name:this.name,
       userName:this.userName,
       email:this.email,
       password:this.password
     }
-    axios.post('http://localhost:3000/auth/register',newUser)
+    await axios.post('http://localhost:3000/auth/register',newUser)
+    .then(res=>{
+     console.log(res);
+     this.error='Succesfully registrated..';
+     
+    },
+    err=>{
+      
+      this.error=err.response.data.error  
+
+    })
+    
+    
     
   }
 

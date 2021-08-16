@@ -4,12 +4,13 @@
      
      
  
- <form @submit.prevent="createPost"><div class="field">
+ <form @submit.prevent="createPost">
+   <!-- <div class="field">
   <label class="label">Username</label>
   <div class="control">
     <input v-model="post.userName" class="input" type="text" placeholder="Text input" required>
   </div>
-</div>
+</div> -->
 
 <div class="field">
   <label class="label">Title</label>

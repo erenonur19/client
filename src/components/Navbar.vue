@@ -43,7 +43,7 @@
             
             <strong>Profile</strong>
           </a>
-          <a class="button is-white">
+          <a @click="logOut" class="button is-white">
             <strong>Log Out</strong>
           </a>
         </div>
@@ -55,6 +55,14 @@
 
 <script>
 export default {
+  methods:{
+    logOut(){
+       localStorage.clear();
+       this.$router.push({
+         name:'Login'
+       })
+    }
+  }
 
 }
 </script>

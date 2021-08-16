@@ -10,25 +10,28 @@
       <br>
       
     </figure>
-  <form class="box" >
+  <form class="box" @submit.prevent="logIn">
   <div class="field">
-    <label class="label">Username</label>
+    <label class="label" >Username</label>
     <div class="control">
-      <input class="input" type="text" placeholder="Username">
+      <input class="input" v-model="username" type="text" placeholder="Username">
     </div>
   </div>
 
   <div class="field">
     <label class="label">Password</label>
     <div class="control">
-      <input class="input" type="password" placeholder="********">
+      <input class="input" v-model="password" type="password" placeholder="********">
     </div>
   </div>
    <br>
    <div class="field">
-  <button class="button is-black">Sign in</button>&nbsp;&nbsp;&nbsp;
+  <button type="submit" class="button is-black">Log in</button>&nbsp;&nbsp;&nbsp;
   
   <button @click="getRegister()" class="button is-danger">Register</button>
+  <br>
+  <br>
+  <strong style="color:red;">{{error}}</strong>
    </div>
 </form>
 
@@ -37,21 +40,61 @@
 </template>
 
 <script>
-import {useRouter} from 'vue-router'
+import {useRouter} from 'vue-router';
+import axios from 'axios'
+import {onMounted} from 'vue'
 export default {
-    setup(){
-    const router=useRouter()
-      function getRegister(){
-          router.push({
-            name:'Register',
-        
+    
+    data(){
+      return{
+      username:'',
+      password:'',
+      error:'', 
+      
+      
+
+
+      }
+    } ,
+    methods:{
+      goPosts(){
+ this.$router.push({
+    name:'Posts'
+  })
+      },
+      getRegister(){
+ this.$router.push({
+    name:'Register'
+  })
+      },
+       
+
+      logIn(){
+        let user={
+          username:this.username,
+          password:this.password,
+
+        }
+        axios.post('http://localhost:3000/auth/login',user)
+        .then(res=>{
+          if(res.status=200)
+          localStorage.setItem('token', res.data.token)
+          this.$router.push({
+            name:'Posts'
           })
           
-        } 
-        return{
-            getRegister
-        }
-    }
+        }).catch(err=>{
+          this.error=err.response.data.error;
+        })
+          
+        
+      }
+      
+    },
+  
+
+  
+
 }
 </script>
 
