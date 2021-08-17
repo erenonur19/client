@@ -59,13 +59,16 @@ export default {
         const posts=ref([])
         const API_URL='http://localhost:3000/posts'
         onMounted(()=>{
+            
             validation()
             getPosts()
+            
+        
         })
 
         async function getPosts(){
                 
-                const response=await fetch(API_URL)
+                const response=await fetch(API_URL,{headers: {token:localStorage.getItem('token')}})
                 const json=await response.json()
                 posts.value=json;
             

@@ -35,7 +35,7 @@
   </div>
   
   <div class="control">
-    <button @click="goLogin" class="button is-danger">Cancel</button>
+    <button type="button" @click="goLogin" class="button is-danger">Cancel</button>
   </div>
   
 </div>
