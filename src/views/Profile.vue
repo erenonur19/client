@@ -3,7 +3,7 @@
   <div class="tabs is-centered is-medium is-boxed">
   <ul>
     <li class="tab is-active" @click="openTab(event,'About')"><a >About</a></li>
-    <li class="tab" @click="openTab(event,'Posts')"><a >Posts</a></li>
+    <li class="tab" @click="openTab(event,'Posts'),getPosts2();"><a >Posts</a></li>
     <li class="tab" @click="openTab(event,'Comments')"><a >Comments</a></li>
   </ul>
 </div>
@@ -26,8 +26,8 @@
       </div>
       <div class="media-content">
         <p class="title is-2">{{profile.name}}</p>
-        <p class="subtitle is-5">{{profile.username}}</p>
-        <p class="subtitle is-8">Email:johnsmith@</p>
+        <p class="subtitle is-5">@{{profile.username}}</p>
+        <p class="subtitle is-8">{{profile.email}}</p>
       </div>
     </div>
 
@@ -39,11 +39,11 @@
   </div>
 </div>
     </div>
-    <div id="Posts" class="content-tab" style="display:none">
+    <div v-for="post in posts2" :key="post.userName" id="Posts" class="content-tab" style="display:none">
        <div class="card">
   <header class="card-header">
     <p class="card-header-title">
-      Component
+      {{post.title}}
     </p>
     <button class="card-header-icon" aria-label="more options">
       <span class="icon">
@@ -53,7 +53,7 @@
   </header>
   <div class="card-content">
     <div class="content">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+     {{post.message}}
       <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
       <br>
       <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
@@ -79,7 +79,7 @@
   </header>
   <div class="card-content">
     <div class="content">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+      
       
       <br>
       <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
@@ -106,25 +106,35 @@
 </template>
 
 <script>
-import { onMounted } from '@vue/runtime-core';
-import{reactive} from 'vue'
+import { onMounted } from 'vue';
+import{reactive,ref} from 'vue'
 import axios from 'axios'
 export default {
 setup(){
-
-
 const profile=reactive({
       name:'',
       username:'',
       email:'',
       createdAt:'',
     })
+const API_URL="http://localhost:3000/profile/posts"    
+const posts2 = ref([]);   
 
   onMounted(()=>{
   getProfile();
   openTab();
   
+  
 })
+
+  async function getPosts2(){
+    
+    await axios.get(API_URL,{headers: {token:localStorage.getItem('token')}}).then(async(response)=>{
+      const result=await response.json();
+      posts2.value=result;
+    })
+
+  }
   
   function openTab(evt, tabName) {
   var i, x, tablinks;
@@ -141,8 +151,8 @@ const profile=reactive({
 }
 async function getProfile() {
       await axios
-          .get('http://localhost:3000/profile')
-          .then(response => (
+          .get('http://localhost:3000/profile',{headers: {token:localStorage.getItem('token')}})
+          .then((response) => (
             profile.name = response.data.name,
             profile.username = response.data.userName,
             profile.email = response.data.email,
@@ -156,6 +166,8 @@ return{
   openTab,
   getProfile,
   profile,
+  getPosts2,
+  posts2,
 }
 }
 }
