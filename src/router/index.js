@@ -16,6 +16,15 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "create" */ "../views/Create.vue"),
   },
+  {
+    path: "/profile",
+    name: "Profile",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "create" */ "../views/Profile.vue"),
+  },
 
   {
     path: "/posts",
@@ -54,6 +63,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "create" */ "../views/Register.vue"),
   },
+  
 ];
 
 const router = createRouter({

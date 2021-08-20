@@ -69,13 +69,13 @@ export default {
       },
        
 
-      logIn(){
+      async logIn(){
         let user={
           username:this.username,
           password:this.password,
 
         }
-        axios.post('http://localhost:3000/auth/login',user)
+        await axios.post('http://localhost:3000/auth/login',user)
         .then(res=>{
           if(res.status=200)
           window.localStorage.setItem('token', res.data.token)

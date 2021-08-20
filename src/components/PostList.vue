@@ -45,6 +45,16 @@
 import { ref,onMounted } from 'vue'
 import {useRouter} from 'vue-router'
 export default {
+  created(){
+    if (localStorage.getItem('reloaded')) {
+       
+        localStorage.removeItem('reloaded');
+    } else {
+        
+        localStorage.setItem('reloaded', '1');
+        location.reload();
+    }
+  },
     setup(){
       function validation(){
           if(localStorage.getItem('token')===null){
@@ -62,6 +72,7 @@ export default {
             
             validation()
             getPosts()
+           
             
         
         })
@@ -71,6 +82,7 @@ export default {
                 const response=await fetch(API_URL,{headers: {token:localStorage.getItem('token')}})
                 const json=await response.json()
                 posts.value=json;
+                 
             
         }
         async function removePost(_id){

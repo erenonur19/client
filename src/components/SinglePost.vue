@@ -64,18 +64,18 @@
   </figure>
   <div class="media-content">
     <div class="field">
-      <label class="label">Username</label>
+      <!-- <label class="label">Username</label>
       
   <div class="control">
     <input v-model="newMessage.userName" class="input" type="text" placeholder="Text input" required>
   </div>
-  
+   -->
   <!-- <label class="label">Title</label>
   <div class="control">
     <input v-model="newMessage.title" class="input" type="text" placeholder="Text input">
   </div> -->
   
-  <label class="label">Message</label>
+  <!-- <label class="label">Message</label> -->
       <p class="control">
         <textarea v-model="newMessage.message" class="textarea" placeholder="Add a comment..." required></textarea>
       </p>
@@ -98,6 +98,7 @@ import {useRouter,useRoute} from 'vue-router'
 import {ref,reactive, onMounted } from 'vue'
 export default{
 setup(){
+
     const route=useRoute();
     const API_URL='http://localhost:3000/posts'
     const post=ref({
@@ -107,14 +108,14 @@ setup(){
     })
     const messages=ref([])
     const newMessage=reactive({
-      userName:'',
-      message:''
-
+      message:'',
     })
     
 onMounted(()=>{
-    getPost()
-    getMessages()
+  getPost()
+  getMessages()
+
+    
     
 })
 async function getPost(_id){
@@ -125,20 +126,19 @@ async function getPost(_id){
     post.value=json;
     
 }
-
 async function getMessages(_id){
      const{id}=route.params
      const response=await fetch(`${API_URL}/${id}/comments`)
      const json=await response.json();
      messages.value=json;
-
 }
 async function postMessage(){
      const {id}=route.params
      const response=await fetch(`${API_URL}/${id}/comments`,{
        method:'POST',
        headers:{
-         'content-type':'application/json'
+         'content-type':'application/json',
+         token:localStorage.getItem('token')
        },
        body: JSON.stringify({
         userName:newMessage.userName,
@@ -160,7 +160,9 @@ return{
     newMessage,
     getPost,
     getMessages,
-    postMessage
+    postMessage,
+    
+    
 }
 
 }
@@ -179,6 +181,7 @@ return{
    {
       position:relative;
       left:1100px;
+      top:16px
 
    }
    .submitForm{

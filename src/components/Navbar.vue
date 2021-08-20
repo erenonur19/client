@@ -36,33 +36,67 @@
       
     </div>
 
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-white">
-            
-            <strong>Profile</strong>
-          </a>
-          <a @click="logOut" class="button is-white">
-            <strong>Log Out</strong>
-          </a>
-        </div>
-      </div>
-    </div>
+    <div class="navbar-item has-dropdown is-hoverable ">
+    <a class="navbar-link " >
+    <strong >{{user2.userName}}</strong>
+  </a>
+
+
+  <div class="navbar-dropdown">
+    <a class="navbar-item" href="http://localhost:8080/profile">
+    Profile
+  </a>
+  <a @click="logOut" class="navbar-item" href="http://localhost:8080/login">
+    Log Out
+  </a>
+  </div>
+  
+  
+</div>
+
   </div>
 </nav>
 </template>
 
 <script>
+import {onMounted} from 'vue'
+import{reactive} from 'vue'
 export default {
-  methods:{
-    logOut(){
+  
+    setup(){
+    onMounted(()=>{
+    getUserName();
+})
+const user2=reactive({
+      name:'',
+      userName:'',
+
+    })
+function logOut(){
        localStorage.clear();
        this.$router.push({
          name:'Login'
        })
     }
-  }
+    async function getUserName(){
+  
+    const response=await fetch('http://localhost:3000/auth/username',{headers:{token:localStorage.getItem('token')}})
+    const json=await response.json()
+    
+    user2.name=json.name;
+    user2.userName=json.userName;
+    
+    }
+    return{
+    logOut,
+    getUserName,
+    user2,
+  }  
+  },
+  
+  
+    
+
 
 }
 </script>
