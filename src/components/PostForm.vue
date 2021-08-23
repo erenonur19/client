@@ -4,7 +4,7 @@
      
      
  
- <form @submit.prevent="createPost">
+ <form @submit.prevent="submitPost">
    <!-- <div class="field">
   <label class="label">Username</label>
   <div class="control">
@@ -40,21 +40,15 @@
 
  </div>
 </template>
-
 <script>
-
-
 import {useRouter} from 'vue-router'
-
 export default {
-  props:['post','createPost'],
+    props:['post','submitPost']
   
          
   
 }
 </script>
 
-
 <style>
-
 </style>

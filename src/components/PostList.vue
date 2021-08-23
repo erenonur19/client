@@ -18,9 +18,9 @@
     </div>
 
     
-    <button @click="getirPost(post._id)" class="button is-black">Details</button>
+    <!-- <button @click="getirPost(post._id)" class="button is-black">Details</button> -->
   
-    <button @click="removePost(post._id)" class="button is-danger ">Delete</button>
+    <!-- <button @click="removePost(post._id)" class="button is-danger ">Delete</button> -->
      
                      
     

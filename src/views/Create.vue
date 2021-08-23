@@ -1,55 +1,18 @@
 <template>
-<div class="container">
-     <br>
-     
-     
- 
- <form @submit.prevent="createPost">
-   <!-- <div class="field">
-  <label class="label">Username</label>
-  <div class="control">
-    <input v-model="post.userName" class="input" type="text" placeholder="Text input" required>
-  </div>
-</div> -->
-
-<div class="field">
-  <label class="label">Title</label>
-  <div class="control">
-    <input v-model="post.title" class="input" type="text" placeholder="Text input" required>
-  </div>
-</div>
-
-
-<div class="field">
-  <label class="label">Message</label>
-  <div class="control">
-    <textarea v-model="post.message" class="textarea" placeholder="Textarea" required></textarea>
-  </div>
-</div>
-
-
-<div class="field is-grouped">
-  <div class="control">
-    <button type="submit" class="button is-black">Submit</button>
-  </div>
-  <div class="control">
-    <button class="button is-danger">Cancel</button>
-  </div> 
-</div></form>
-
-
- </div>
+<PostForm :post="post" :submitPost="createPost" />
  
 </template>
 
 <script>
-
+import PostForm from '../components/PostForm.vue'
 import{reactive} from 'vue'
 import{useRouter} from 'vue-router'
 import {onMounted} from 'vue'
 
 export default {
-
+components:{
+    PostForm
+  },
 
   setup(){
     onMounted(()=>{
