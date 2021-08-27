@@ -91,10 +91,18 @@ const API_URL2="http://localhost:3000/posts"
 const posts2 = ref([]);   
 
   onMounted(()=>{
+  validation();
   getProfile();
   getPosts2();
 })
-
+function validation(){
+          if(localStorage.getItem('token')===null){
+            alert('You need to be logged in before you access the content..')
+          router.push({
+            name:'Login',
+          })}
+        
+        }
   async function getPosts2(){
     
     await axios.get(API_URL,{headers: {token:localStorage.getItem('token')}}).then((response)=>{
@@ -152,6 +160,7 @@ return{
   getPost2,
   deletePost,
   editPost,
+  validation,
 }
 }
 }

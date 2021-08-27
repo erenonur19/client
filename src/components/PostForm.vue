@@ -15,7 +15,7 @@
 <div class="field">
   <label class="label">Title</label>
   <div class="control">
-    <input v-model="post.title" class="input" type="text" placeholder="Text input" required>
+    <input v-model="post.title" class="input" type="text" placeholder="Text input" required minlength="3" maxlength="30">
   </div>
 </div>
 
@@ -23,7 +23,7 @@
 <div class="field">
   <label class="label">Message</label>
   <div class="control">
-    <textarea v-model="post.message" class="textarea" placeholder="Textarea" required></textarea>
+    <textarea v-model="post.message" class="textarea" placeholder="Textarea" required minlength="3" maxlength="900"></textarea>
   </div>
 </div>
 

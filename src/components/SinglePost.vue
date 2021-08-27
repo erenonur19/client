@@ -1,5 +1,7 @@
 <template>
+
 <div class="container">
+  <PageLoader />
   <div class="card">
   <div class="card-image">
     <figure style="text-align:center">
@@ -18,7 +20,9 @@
      <div class="content">
       {{post.message}}
   </div>
-
+<div class="content">
+      {{convertDate(post.createdAt)}}
+  </div>
  
       
     </div>
@@ -31,7 +35,7 @@
   <div class="media-content">
     <div class="content">
        
-        <strong>&nbsp;&nbsp;{{message.userName}}</strong> <!-- <small>@johnsmith</small> <small>31m</small> -->
+        <strong style="color:blue;">&nbsp;&nbsp;{{message.userName}}</strong> <small>{{convertDate(message.createdAt)}}</small>
         <br>
        &nbsp;&nbsp;&nbsp; {{message.message}}
       
@@ -94,55 +98,75 @@
 
 <script>
 import {useRouter,useRoute} from 'vue-router'
+import PageLoader from '../components/PageLoader.vue'
+
 
 import {ref,reactive, onMounted } from 'vue'
+import axios from 'axios'
 export default{
+ components: {
+    PageLoader
+  },
+  
+  
 setup(){
-
     const route=useRoute();
     const API_URL='http://localhost:3000/posts'
     const post=ref({
         userName:'',
         title:'',
-        message:''
+        message:'',
+        createdAt:''
     })
     const messages=ref([])
     const newMessage=reactive({
       message:'',
     })
+    function convertDate(date){
+         
+         var day=date.slice(0,10)
+         
+         var time=date.slice(11,16)
+         
+         return day+"/"+time;
+        }
     
-onMounted(()=>{
+
+   if (localStorage.getItem('reloaded')) {
+        localStorage.removeItem('reloaded');
+    } else {
+      setTimeout(() => {
+        localStorage.setItem('reloaded', '1');
+        location.reload();
+      }, 2000);
+        
+    }
+  Promise.all([getPost(),getMessages()])
   
-  Promise.all([getPost(),getMessages()]).then((values)=>{
-  post.value=values[0];
-  messages.value=values[1];
-  })
 
-
+function getPost(_id){
     
-    
-})
-async function getPost(_id){
-    
-    return new Promise(async(resolve,reject)=>{
-     const{id}=route.params
-    
-    const response= await fetch(`${API_URL}/${id}`).then(res=>{
-    
-    resolve(res.json());
+    return new Promise((resolve,reject)=>{
+    const{id}=route.params
+    axios.get(`${API_URL}/${id}`).then(res=>{
+    post.value=res.data
+    resolve(post)
+    }).catch((err)=>{
+    reject(err)
     })
-    reject("Error")
-    
-    })
-   
+    }) 
 }
-async function getMessages(_id){
-     return new Promise(async(resolve,reject)=>{
+function getMessages(_id){
+
+     return new Promise((resolve,reject)=>{
      const{id}=route.params
-     const response=await fetch(`${API_URL}/${id}/comments`).then(res=>{
-       resolve(res.json());
-       reject("Error")
+     axios.get(`${API_URL}/${id}/comments`).then(res=>{
+       messages.value=res.data
+       resolve(messages)
      })
+     .catch((err)=>{
+         reject(err)
+     }) 
      })
      
 }
@@ -175,6 +199,8 @@ return{
     getPost,
     getMessages,
     postMessage,
+    convertDate,
+    
     
     
 }

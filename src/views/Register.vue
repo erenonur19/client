@@ -5,25 +5,25 @@
   <div class="field">
   <label class="label">Name</label>
   <div class="control">
-    <input class="input" type="text" v-model="name" placeholder="Name" required>
+    <input class="input" type="text" v-model="name" placeholder="Name" required minlength="3" maxlength="15">
   </div>
 </div>
 
 <div class="field">
   <label class="label">Username</label>
-    <input class="input is-success" type="text" placeholder="Username" v-model="userName" required>
+    <input class="input is-success" type="text" placeholder="Username" v-model="userName" required minlength="3" maxlength="15">
   <!-- <p class="help is-success">This username is available</p> -->
 </div>
 
 <div class="field">
   <label class="label">Email</label>
-    <input class="input is-danger" type="email" placeholder="example@gmail.com" v-model="email" required>
+    <input class="input is-danger" type="email" placeholder="example@gmail.com" v-model="email" required minlength="3" maxlength="30">
   <!-- <p class="help is-danger">This email is invalid</p> -->
 </div>
  <div class="field">
   <label class="label">Password</label>
   <div class="control">
-    <input class="input" type="password" placeholder="********" v-model="password" required>
+    <input class="input" type="password" placeholder="********" v-model="password" required minlength="3" maxlength="100">
   </div>
 </div>
 <br>
@@ -31,7 +31,7 @@
 
 <div class="field is-grouped">
   <div class="control">
-    <button class="button is-black">Register</button>
+    <button type="submit" class="button is-black">Register</button>
   </div>
   
   <div class="control">
@@ -49,10 +49,10 @@
 <script>
 import Vue from 'vue';
 import axios from 'axios';
-import{useRouter} from 'vue-router'
+import{useRouter,useRoute} from 'vue-router'
 
 export default {
-
+ 
   data(){
   return{
     name:'',
@@ -64,6 +64,7 @@ export default {
 },
 
 methods:{
+  
   goLogin(){
   
   this.$router.push({

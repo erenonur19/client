@@ -21,7 +21,7 @@
     <strong class="navbar-item">FORUMAPI</strong>    
 
 
-    <a class="navbar-item" href="http://localhost:8080/login">
+    <a class="navbar-item" href="http://localhost:8080/login" v-if="isLoggedIn">
         <strong>Log In</strong>
       </a>
 
@@ -62,6 +62,11 @@
 import {onMounted} from 'vue'
 import{reactive} from 'vue'
 export default {
+  data: () => {
+      return {
+        isLoggedIn: false
+      }
+    },
   
     setup(){
     onMounted(()=>{
@@ -72,6 +77,12 @@ const user2=reactive({
       userName:'',
 
     })
+function loggedIn(){
+  if(localStorage.getItem('token')){
+    isLoggedIn=true;
+  }
+  else return isLoggedIn;
+}   
 function logOut(){
        localStorage.clear();
        this.$router.push({
@@ -91,6 +102,7 @@ function logOut(){
     logOut,
     getUserName,
     user2,
+    loggedIn
   }  
   },
   
